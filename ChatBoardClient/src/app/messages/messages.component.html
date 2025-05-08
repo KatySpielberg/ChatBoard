@@ -1,0 +1,11 @@
+<div class="chat-container">
+    <input [(ngModel)]="newMessage" placeholder="Type a message" />
+    <button (click)="send()">Send</button>
+  
+    <ul>
+      <li *ngFor="let m of messages">
+        {{ m.text }} ({{ m.createdAt | date:'short' }})
+        <button (click)="delete(m.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
