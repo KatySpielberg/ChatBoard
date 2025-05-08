@@ -1,0 +1,18 @@
+# Ignore build artifacts and VS folders
+*.user
+*.vspscc
+.vs/
+bin/
+obj/
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore publish output
+publish/
+
+# Ignore secrets
+secrets.json
+
+# Ignore generated files
+*.log

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBoardAPI", "ChatBoardAPI.csproj", "{820618EF-EC64-44D6-9725-20256B8C03AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{820618EF-EC64-44D6-9725-20256B8C03AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{820618EF-EC64-44D6-9725-20256B8C03AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{820618EF-EC64-44D6-9725-20256B8C03AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{820618EF-EC64-44D6-9725-20256B8C03AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6C04A76-9E21-4F0F-8FB1-6D9F73583FE1}
+	EndGlobalSection
+EndGlobal
