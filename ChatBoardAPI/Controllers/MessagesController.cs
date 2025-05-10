@@ -10,6 +10,8 @@ namespace ChatBoardAPI.Controllers
     [Route("api/[controller]")]
     public class MessagesController : Controller
     {
+        // In-memory message store
+        // Хранилище сообщений в оперативной памяти
         private static List<Message> _messages = new();
         private readonly IHubContext<MessageHub> _hubContext;
 
@@ -18,19 +20,27 @@ namespace ChatBoardAPI.Controllers
             _hubContext = hubContext;
         }
 
+        // GET: api/messages
+        // Получить все сообщения
         [HttpGet]
         public IActionResult GetAll() => Ok(_messages);
 
+        // POST: api/messages
+        // Добавить сообщение и отправить его всем через SignalR
         [HttpPost]
         public async Task <IActionResult> Post([FromBody] Message message) 
         {
             message.Id = _messages.Count + 1;
             _messages.Add(message);
 
-            await _hubContext.Clients.All.SendAsync("ReceivedMessage", message);
+            // Notify all clients through SignalR
+            // Уведомление всех клиентов через SignalR
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
             return Ok();
         }
 
+        // DELETE: api/messages/{id}
+        // Удалить сообщение по ID
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -38,7 +48,7 @@ namespace ChatBoardAPI.Controllers
             if (msg == null) return NotFound();
 
             _messages.Remove(msg);
-            return NoContent();
+            return NoContent(); // 204
         }
 
     }
