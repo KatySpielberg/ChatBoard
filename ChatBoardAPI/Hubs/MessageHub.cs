@@ -7,9 +7,16 @@ namespace ChatBoardAPI.Hubs
     // Хаб SignalR для рассылки сообщений всем клиентам
     public class MessageHub : Hub
     {
-       public async Task SendMessage (Message message) 
+        public async Task SendMessage(Message message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", message);
+            try
+            {
+                await Clients.All.SendAsync("ReceiveMessage", message);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error in SendMessage: {ex.Message}");
+            }
         }
     }
 }

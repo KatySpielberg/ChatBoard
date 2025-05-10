@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as signalR from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -56,7 +56,12 @@ export class MessageService {
    * Отправка нового сообщения на сервер
    */
   sendMessage(text: string) {
-    return this.http.post(this.apiUrl, { text });
+    return this.http.post(this.apiUrl, { text }).pipe(
+      catchError(error => {
+        console.error('Error sending message:', error);
+        return throwError(error);
+      })
+    );
   }
 
   /**

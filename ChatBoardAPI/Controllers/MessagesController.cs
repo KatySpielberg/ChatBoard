@@ -28,15 +28,24 @@ namespace ChatBoardAPI.Controllers
         // POST: api/messages
         // Добавить сообщение и отправить его всем через SignalR
         [HttpPost]
-        public async Task <IActionResult> Post([FromBody] Message message) 
+        public async Task<IActionResult> Post([FromBody] Message message)
         {
-            message.Id = _messages.Count + 1;
-            _messages.Add(message);
+            try
+            {
+                message.Id = _messages.Count + 1;
+                _messages.Add(message);
 
-            // Notify all clients through SignalR
-            // Уведомление всех клиентов через SignalR
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
-            return Ok();
+                // Notify all clients through SignalR
+                // Уведомление всех клиентов через SignalR
+                await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Log exception and return an error response
+                Console.Error.WriteLine($"Error in Post: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // DELETE: api/messages/{id}
